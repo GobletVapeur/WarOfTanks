@@ -527,7 +527,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 463290102}
-  - component: {fileID: 463290101}
   - component: {fileID: 463290106}
   - component: {fileID: 463290105}
   - component: {fileID: 463290104}
@@ -539,20 +538,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &463290101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 463290100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77b8955413524b289d9be87c318a7096, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  tank: {fileID: 279265505}
-  turret: {fileID: 0}
 --- !u!4 &463290102
 Transform:
   m_ObjectHideFlags: 0
@@ -581,7 +566,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   tank: {fileID: 279265505}
-  turret: {fileID: 1263457281}
 --- !u!114 &463290104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -596,6 +580,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TankController
   moveSpeed: 6
   turnSpeed: 120
+  turret: {fileID: 0}
 --- !u!114 &463290105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -608,7 +593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2012414a382fd0c41af35c2373ef932d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TankStats
-  tankId: Tank
+  tankId: Tank2
   maxStamina: 10
   startingStamina: 10
   staminaRegenPerTurn: 5
@@ -709,7 +694,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 941716578}
-  - component: {fileID: 941716577}
   - component: {fileID: 941716582}
   - component: {fileID: 941716581}
   - component: {fileID: 941716580}
@@ -721,20 +705,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &941716577
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 941716576}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77b8955413524b289d9be87c318a7096, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  tank: {fileID: 858353712}
-  turret: {fileID: 0}
 --- !u!4 &941716578
 Transform:
   m_ObjectHideFlags: 0
@@ -763,7 +733,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   tank: {fileID: 858353712}
-  turret: {fileID: 452543798}
 --- !u!114 &941716580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -778,6 +747,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TankController
   moveSpeed: 6
   turnSpeed: 120
+  turret: {fileID: 0}
 --- !u!114 &941716581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -790,7 +760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2012414a382fd0c41af35c2373ef932d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TankStats
-  tankId: Tank
+  tankId: Tank1
   maxStamina: 10
   startingStamina: 10
   staminaRegenPerTurn: 5
@@ -845,6 +815,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tank1
       objectReference: {fileID: 0}
+    - target: {fileID: 1158792013374512201, guid: 3f82b0d4360aac642865cc93a98f46d9, type: 3}
+      propertyPath: tankId
+      value: Tank1
+      objectReference: {fileID: 0}
     - target: {fileID: 6558436799675434065, guid: 3f82b0d4360aac642865cc93a98f46d9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -885,6 +859,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6709978516914548833, guid: 3f82b0d4360aac642865cc93a98f46d9, type: 3}
+      propertyPath: turret
+      value: 
+      objectReference: {fileID: 452543798}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -899,6 +877,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1738560695}
+  - component: {fileID: 1738560696}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -921,6 +900,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1738560696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738560694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93d49766308e75b498044b3306e5a980, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  players:
+  - {fileID: 941716579}
+  - {fileID: 463290103}
 --- !u!1001 &2038896038
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -931,6 +925,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 577616483932916499, guid: 3f82b0d4360aac642865cc93a98f46d9, type: 3}
       propertyPath: m_Name
+      value: Tank2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1158792013374512201, guid: 3f82b0d4360aac642865cc93a98f46d9, type: 3}
+      propertyPath: tankId
       value: Tank2
       objectReference: {fileID: 0}
     - target: {fileID: 6558436799675434065, guid: 3f82b0d4360aac642865cc93a98f46d9, type: 3}
@@ -973,6 +971,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6709978516914548833, guid: 3f82b0d4360aac642865cc93a98f46d9, type: 3}
+      propertyPath: turret
+      value: 
+      objectReference: {fileID: 1263457281}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

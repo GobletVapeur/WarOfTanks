@@ -7,6 +7,7 @@ public class TankController : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 6f;
     [SerializeField] private float turnSpeed = 120f;
+    [SerializeField] private TurretController turret;
 
     private Rigidbody rb;
     private TankStats stats;
@@ -76,6 +77,11 @@ public class TankController : MonoBehaviour
     public void SetMoveInput(Vector2 input)
     {
         moveInput = input;
+    }
+    
+    public void SetAimInput(Vector2 input)
+    {
+        turret?.SetAimInput(input);
     }
 
     public void BeginTurn()

@@ -1,67 +1,40 @@
-using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private TankController[] tanks;
+    [SerializeField] private PlayerController[] players;
 
-    public event Action<TankController> TurnStarted;
-    public event Action<TankController> TurnEnded;
-
-    private int activeTankIndex = -1;
-
-    public TankController ActiveTank =>
-        activeTankIndex >= 0 && activeTankIndex < tanks.Length
-            ? tanks[activeTankIndex]
-            : null;
+    private int currentPlayerIndex;
 
     private void Start()
     {
-        StartGame();
-    }
-
-    private void StartGame()
-    {
-        if (tanks == null || tanks.Length == 0)
+        for (int i = 0; i < players.Length; i++)
         {
-            Debug.LogError("GameManager requires at least one TankController.", this);
-            return;
+            players[i].SetActive(false);
         }
 
-        for (int i = 0; i < tanks.Length; i++)
-        {
-            if (tanks[i] == null)
-            {
-                Debug.LogError($"GameManager tank slot {i} is not assigned.", this);
-                return;
-            }
-
-            tanks[i].EndTurn();
-        }
-
-        activeTankIndex = 0;
-        BeginTurn(activeTankIndex);
+        currentPlayerIndex = 0;
+        players[currentPlayerIndex].SetActive(true);
     }
 
-    public void EndTurn()
+    private void Update()
     {
-        if (tanks == null || tanks.Length == 0 || activeTankIndex < 0)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            return;
+            NextTurn();
         }
-
-        TankController previousTank = tanks[activeTankIndex];
-        previousTank.EndTurn();
-        TurnEnded?.Invoke(previousTank);
-
-        activeTankIndex = (activeTankIndex + 1) % tanks.Length;
-        BeginTurn(activeTankIndex);
     }
 
-    private void BeginTurn(int tankIndex)
+    private void NextTurn()
     {
-        TankController currentTank = tanks[tankIndex];
-        currentTank.BeginTurn();
-        TurnStarted?.Invoke(currentTank);
+        players[currentPlayerIndex].SetActive(false);
+
+        currentPlayerIndex++;
+        if (currentPlayerIndex >= players.Length)
+            currentPlayerIndex = 0;
+
+        players[currentPlayerIndex].SetActive(true);
     }
 }
