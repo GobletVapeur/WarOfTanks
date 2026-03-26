@@ -22,6 +22,11 @@ public class TankController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         stats = GetComponent<TankStats>();
+        
+        if (turret == null)
+        {
+            turret = GetComponentInChildren<TurretController>();
+        }
     }
 
     private void FixedUpdate()

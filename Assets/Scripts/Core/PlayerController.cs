@@ -1,11 +1,16 @@
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
-{
-    [SerializeField] private TankController tank;
+{ 
+    private TankController tank;
 
     private TankControls controls;
     private bool isActive = true;
+    
+    public void Initialize(TankController assignedTank)
+    {
+        tank = assignedTank;
+    }
 
     private void Awake()
     {
