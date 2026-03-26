@@ -386,7 +386,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 1, z: 5}
+  m_LocalScale: {x: 10, y: 1, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -527,7 +527,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 463290102}
-  - component: {fileID: 463290105}
   - component: {fileID: 463290103}
   m_Layer: 0
   m_Name: Player2
@@ -563,23 +562,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b8955413524b289d9be87c318a7096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
---- !u!114 &463290105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 463290100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2012414a382fd0c41af35c2373ef932d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TankStats
-  tankId: Tank2
-  maxStamina: 10
-  startingStamina: 10
-  staminaRegenPerTurn: 5
-  movementStaminaCostPerUnit: 1
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,7 +620,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 941716578}
-  - component: {fileID: 941716581}
   - component: {fileID: 941716579}
   m_Layer: 0
   m_Name: Player1
@@ -674,23 +655,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b8955413524b289d9be87c318a7096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
---- !u!114 &941716581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 941716576}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2012414a382fd0c41af35c2373ef932d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TankStats
-  tankId: Tank1
-  maxStamina: 10
-  startingStamina: 10
-  staminaRegenPerTurn: 5
-  movementStaminaCostPerUnit: 1
 --- !u!1001 &1301514391
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -699,6 +663,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1445558400856869738, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
+      propertyPath: tankId
+      value: Tank
+      objectReference: {fileID: 0}
+    - target: {fileID: 1445558400856869738, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
+      propertyPath: maxStamina
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1445558400856869738, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
+      propertyPath: startingStamina
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1445558400856869738, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
+      propertyPath: staminaRegenPerTurn
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 3140517399182812155, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -709,7 +689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3140517399182812155, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: -27.06
       objectReference: {fileID: 0}
     - target: {fileID: 3140517399182812155, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
       propertyPath: m_LocalRotation.w
@@ -814,9 +794,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1445558400856869738, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
+      propertyPath: tankId
+      value: Tank
+      objectReference: {fileID: 0}
+    - target: {fileID: 1445558400856869738, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
+      propertyPath: maxStamina
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1445558400856869738, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
+      propertyPath: startingStamina
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1445558400856869738, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
+      propertyPath: staminaRegenPerTurn
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 3140517399182812155, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3140517399182812155, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
       propertyPath: m_LocalPosition.y
@@ -824,11 +820,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3140517399182812155, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10
+      value: 26.44
       objectReference: {fileID: 0}
     - target: {fileID: 3140517399182812155, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3140517399182812155, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
       propertyPath: m_LocalRotation.x
@@ -836,7 +832,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3140517399182812155, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3140517399182812155, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
       propertyPath: m_LocalRotation.z
@@ -848,7 +844,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3140517399182812155, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 3140517399182812155, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

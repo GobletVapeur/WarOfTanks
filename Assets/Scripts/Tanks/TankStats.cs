@@ -8,9 +8,9 @@ public class TankStats : MonoBehaviour
     [SerializeField] private string tankId = "Tank";
 
     [Header("Stamina")]
-    [SerializeField] private float maxStamina = 10f;
-    [SerializeField] private float startingStamina = 10f;
-    [SerializeField] private float staminaRegenPerTurn = 5f;
+    [SerializeField] private float maxStamina = 50f;
+    [SerializeField] private float startingStamina = 50f;
+    [SerializeField] private float staminaRegenPerTurn = 30f;
     [SerializeField] private float movementStaminaCostPerUnit = 1f;
 
     public event Action<TankStats> StaminaChanged;
