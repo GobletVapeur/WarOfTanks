@@ -30,6 +30,12 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (tank == null)
+        {
+            Debug.LogError(name + " has no tank assigned.");
+            return;
+        }
+        
         if (!isActive)
         {
             tank?.SetMoveInput(Vector2.zero);

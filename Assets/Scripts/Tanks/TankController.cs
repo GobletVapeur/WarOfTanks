@@ -86,7 +86,13 @@ public class TankController : MonoBehaviour
     
     public void SetAimInput(Vector2 input)
     {
-        turret?.SetAimInput(input);
+        if (turret == null)
+        {
+            Debug.LogError(name + " has no TurretController!");
+            return;
+        }
+
+        turret.SetAimInput(input);
     }
 
     public void BeginTurn()
