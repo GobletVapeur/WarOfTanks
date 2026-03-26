@@ -76,6 +76,7 @@ public class TankController : MonoBehaviour
         if (!enabled)
         {
             moveInput = Vector2.zero;
+            turret?.SetAimInput(Vector2.zero);
         }
     }
 
