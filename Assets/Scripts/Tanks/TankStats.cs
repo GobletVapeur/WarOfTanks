@@ -8,13 +8,14 @@ public class TankStats : MonoBehaviour
     [SerializeField] private string tankId = "Tank";
 
     [Header("Stamina")]
-    [SerializeField] private float maxStamina = 50f;
-    [SerializeField] private float startingStamina = 50f;
-    [SerializeField] private float staminaRegenPerTurn = 30f;
+    [SerializeField] private float maxStamina = 20f;
+    [SerializeField] private float startingStamina = 20f;
+    [SerializeField] private float staminaRegenPerTurn = 10f;
     [SerializeField] private float movementStaminaCostPerUnit = 1f;
+    [SerializeField] private float turretStaminaCostPerDegree = 0.2f;
 
     public event Action<TankStats> StaminaChanged;
-
+    public float TurretStaminaCostPerDegree => turretStaminaCostPerDegree;
     public string TankId => tankId;
     public float MaxStamina => maxStamina;
     public float CurrentStamina { get; private set; }

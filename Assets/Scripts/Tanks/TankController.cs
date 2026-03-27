@@ -31,8 +31,9 @@ public class TankController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!controlsEnabled)
+        if (!controlsEnabled || !stats.HasStamina)
         {
+            turret?.SetAimInput(Vector2.zero);
             return;
         }
 
@@ -59,6 +60,7 @@ public class TankController : MonoBehaviour
         rb.MovePosition(rb.position + movement);
 
         stats.ConsumeMovement(allowedDistance);
+        
     }
 
     private void RotateTank()
@@ -87,13 +89,26 @@ public class TankController : MonoBehaviour
     
     public void SetAimInput(Vector2 input)
     {
-        if (turret == null)
+        if (!controlsEnabled || turret == null)
+            return;
+
+        if (!stats.HasStamina)
         {
-            Debug.LogError(name + " has no TurretController!");
+            turret.SetAimInput(Vector2.zero);
+            return;
+        }
+
+        float rotation = input.x * turret.TurnSpeed * Time.deltaTime;
+        float cost = Mathf.Abs(rotation) * stats.TurretStaminaCostPerDegree;
+
+        if (cost > stats.CurrentStamina)
+        {
+            turret.SetAimInput(Vector2.zero);
             return;
         }
 
         turret.SetAimInput(input);
+        stats.ConsumeMovement(cost);
     }
 
     public void BeginTurn()

@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
+        if (controls == null)
+            controls = new TankControls();
+
         controls.Gameplay.Enable();
     }
 

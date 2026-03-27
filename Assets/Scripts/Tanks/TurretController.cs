@@ -6,6 +6,7 @@ public class TurretController : MonoBehaviour
 
     private Vector2 aimInput;
     private bool controlsEnabled = true;
+    public float TurnSpeed => turnSpeed;
 
     private void Update()
     {

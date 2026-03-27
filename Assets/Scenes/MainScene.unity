@@ -227,8 +227,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.30070576, y: 0, z: 0, w: 0.953717}
-  m_LocalPosition: {x: 0, y: 18, z: -18}
+  m_LocalRotation: {x: -0.22658086, y: 0.6792778, z: -0.23404649, w: -0.65762085}
+  m_LocalPosition: {x: 20.22149, y: 22.885777, z: -0.09599495}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -669,15 +669,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1445558400856869738, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
       propertyPath: maxStamina
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1445558400856869738, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
       propertyPath: startingStamina
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1445558400856869738, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
       propertyPath: staminaRegenPerTurn
-      value: 30
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1445558400856869738, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
+      propertyPath: turretStaminaCostPerDegree
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3140517399182812155, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
       propertyPath: m_LocalPosition.x
@@ -800,15 +804,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1445558400856869738, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
       propertyPath: maxStamina
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1445558400856869738, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
       propertyPath: startingStamina
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1445558400856869738, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
       propertyPath: staminaRegenPerTurn
-      value: 30
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1445558400856869738, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
+      propertyPath: turretStaminaCostPerDegree
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3140517399182812155, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
       propertyPath: m_LocalPosition.x
