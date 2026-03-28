@@ -669,15 +669,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1445558400856869738, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
       propertyPath: maxStamina
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1445558400856869738, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
       propertyPath: startingStamina
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1445558400856869738, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
       propertyPath: staminaRegenPerTurn
-      value: 30
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1445558400856869738, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
+      propertyPath: turretStaminaCostPerDegree
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1926638195153478892, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
       propertyPath: m_LocalPosition.x
@@ -832,15 +836,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1445558400856869738, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
       propertyPath: maxStamina
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1445558400856869738, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
       propertyPath: startingStamina
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1445558400856869738, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
       propertyPath: staminaRegenPerTurn
-      value: 30
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1445558400856869738, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
+      propertyPath: turretStaminaCostPerDegree
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1926638195153478892, guid: a3749b18ccf0ad043b4468a091b71e56, type: 3}
       propertyPath: m_LocalPosition.z
