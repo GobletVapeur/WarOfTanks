@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -8,11 +9,15 @@ public class TankController : MonoBehaviour
     [SerializeField] private float moveSpeed = 6f;
     [SerializeField] private float turnSpeed = 120f;
     [SerializeField] private TurretController turret;
+    [Header("Weapons")]
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private float projectileSpeed = 25f;
 
     private Rigidbody rb;
     private TankStats stats;
 
-    private Vector2 moveInput;
+    public Vector2 moveInput;
     private bool controlsEnabled = true;
 
     public TankStats Stats => stats;
@@ -35,9 +40,32 @@ public class TankController : MonoBehaviour
         {
             return;
         }
-
+       
         MoveTank();
         RotateTank();
+    }
+    public void fire()
+    { 
+        if (!controlsEnabled)
+            return;
+
+  
+
+        // Determine spawn position and rotation: prefer explicit firePoint, then turret barrel, then tank forward
+        Transform barrel = turret != null ? turret.Barrel : null;
+        Vector3 spawnPos = firePoint != null ? firePoint.position : (barrel != null ? barrel.position : transform.position + transform.forward * 1.5f);
+        Quaternion spawnRot = firePoint != null ? firePoint.rotation : (barrel != null ? barrel.rotation : transform.rotation);
+
+        GameObject proj = Instantiate(projectilePrefab, spawnPos, spawnRot);
+
+        Rigidbody projRb = proj.GetComponent<Rigidbody>();
+        if (projRb != null)
+        {
+            projRb.linearVelocity = spawnRot * Vector3.forward * projectileSpeed;
+        }
+
+        // Destroy projectile after 5 seconds to avoid lingering objects
+        Destroy(proj, 5f);
     }
 
     private void MoveTank()
@@ -46,7 +74,14 @@ public class TankController : MonoBehaviour
         float requestedDistance = Mathf.Abs(signedRequestedDistance);
 
         if (requestedDistance <= 0f || !stats.HasStamina)
+        {
+             if (rb != null)
+            {
+                rb.linearVelocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+            }
             return;
+        }
 
         float allowedDistance = stats.GetMaxMovableDistance(requestedDistance);
         if (allowedDistance <= 0f)
