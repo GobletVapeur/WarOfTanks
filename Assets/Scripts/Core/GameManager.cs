@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private PlayerController[] players;
     [SerializeField] private TankController[] tanks;
+    [SerializeField] private string endSceneName = "EndScreen";
 
     private int currentPlayerIndex;
 
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             NextTurn();
+            CheckEndGame();
         }
     }
 
@@ -57,5 +60,26 @@ public class GameManager : MonoBehaviour
     {
         players[index].SetActive(false);
         tanks[index].EndTurn();
+    }
+    
+    private void CheckEndGame()
+    {
+        int alive = 0;
+
+        foreach (var tank in tanks)
+        {
+            if (tank.Stats.HasStamina) // todo temporaire (vie plus tard)
+                alive++;
+        }
+
+        if (alive <= 1)
+        {
+            EndGame();
+        }
+    }
+    
+    private void EndGame()
+    {
+        SceneManager.LoadScene(endSceneName);
     }
 }
