@@ -18,10 +18,13 @@ public class HUDManager : MonoBehaviour
         if (currentTank == null)
             return;
 
-        float healthPercent = currentTank.Stats.CurrentHealth / currentTank.Stats.MaxHealth;
-        float staminaPercent = currentTank.Stats.CurrentStamina / currentTank.Stats.MaxStamina;
+        float healthPercent = (float)currentTank.Stats.CurrentHealth / currentTank.Stats.MaxHealth;
+        float staminaPercent = (float)currentTank.Stats.CurrentStamina / currentTank.Stats.MaxStamina;
 
-        healthBarFill.transform.localScale = new Vector3(healthPercent, 1, 1);
-        staminaBarFill.transform.localScale = new Vector3(staminaPercent, 1, 1);
+        healthPercent = Mathf.Clamp01(healthPercent);
+        staminaPercent = Mathf.Clamp01(staminaPercent);
+
+        healthBarFill.rectTransform.localScale = new Vector3(healthPercent, 1f, 1f);
+        staminaBarFill.rectTransform.localScale = new Vector3(staminaPercent, 1f, 1f);
     }
 }
