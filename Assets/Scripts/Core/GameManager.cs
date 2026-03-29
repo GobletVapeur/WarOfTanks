@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private PlayerController[] players;
     [SerializeField] private TankController[] tanks;
-    [SerializeField] private string endSceneName = "EndScreen";
+    [SerializeField] private HUDManager hud;
 
     private int currentPlayerIndex;
 
@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
     {
         players[index].SetActive(true);
         tanks[index].BeginTurn();
+        hud.SetActiveTank(tanks[index]);
     }
 
     private void DeactivatePlayer(int index)
@@ -64,15 +65,15 @@ public class GameManager : MonoBehaviour
     
     private void CheckEndGame()
     {
-        int alive = 0;
+        int aliveCount = 0;
 
         foreach (var tank in tanks)
         {
-            if (tank.Stats.HasStamina) // todo temporaire (vie plus tard)
-                alive++;
+            if (tank.Stats.IsAlive)
+                aliveCount++;
         }
 
-        if (alive <= 1)
+        if (aliveCount <= 1)
         {
             EndGame();
         }
@@ -80,6 +81,6 @@ public class GameManager : MonoBehaviour
     
     private void EndGame()
     {
-        SceneManager.LoadScene(endSceneName);
+        SceneManager.LoadScene("EndScreen");
     }
 }

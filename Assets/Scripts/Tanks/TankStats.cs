@@ -13,15 +13,19 @@ public class TankStats : MonoBehaviour
     [SerializeField] private float staminaRegenPerTurn = 10f;
     [SerializeField] private float movementStaminaCostPerUnit = 1f;
     [SerializeField] private float turretStaminaCostPerDegree = 0.2f;
-
+    [SerializeField] private float maxHealth = 100f;
+    
     public event Action<TankStats> StaminaChanged;
     public float TurretStaminaCostPerDegree => turretStaminaCostPerDegree;
     public string TankId => tankId;
     public float MaxStamina => maxStamina;
     public float CurrentStamina { get; private set; }
+    public bool HasStamina => CurrentStamina > 0f;
     public float StaminaRegenPerTurn => staminaRegenPerTurn;
     public float MovementStaminaCostPerUnit => movementStaminaCostPerUnit;
-    public bool HasStamina => CurrentStamina > 0f;
+    public float MaxHealth => maxHealth;
+    public float CurrentHealth { get; private set; }
+    public bool IsAlive => CurrentHealth > 0f;
 
     private void Awake()
     {
@@ -31,6 +35,7 @@ public class TankStats : MonoBehaviour
         movementStaminaCostPerUnit = Mathf.Max(0f, movementStaminaCostPerUnit);
 
         CurrentStamina = startingStamina;
+        CurrentHealth = maxHealth;
     }
 
     public void RegenerateForTurnStart()
@@ -90,5 +95,13 @@ public class TankStats : MonoBehaviour
 
         CurrentStamina = clampedValue;
         StaminaChanged?.Invoke(this);
+    }
+    
+    public void TakeDamage(float amount)
+    {
+        if (amount <= 0f || !IsAlive)
+            return;
+
+        CurrentHealth = Mathf.Max(CurrentHealth - amount, 0f);
     }
 }
