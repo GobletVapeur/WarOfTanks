@@ -3,6 +3,7 @@
     <ui:VisualElement name="background" style="background-color: rgba(113, 89, 89, 0.2); color: rgba(120, 214, 145, 0.58);">
         <ui:VisualElement name="window" class="hidden window" style="background-color: rgba(161, 229, 175, 0.8); -unity-background-image-tint-color: rgba(154, 171, 155, 0.29);">
             <ui:Label text="Controls" name="header" style="position: relative; -unity-text-align: middle-center; white-space: pre-wrap; -unity-font-style: bold; font-size: 16px; -unity-text-outline-color: rgb(233, 221, 221); color: rgb(255, 251, 251);"/>
+            <ui:ToggleButtonGroup label="Toggle Button Group" name="controlPreset"/>
             <ui:ScrollView name="controlArea"/>
         </ui:VisualElement>
     </ui:VisualElement>

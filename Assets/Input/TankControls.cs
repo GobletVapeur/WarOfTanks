@@ -295,11 +295,22 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""e6586c6f-f104-48bd-a750-7a9f0fae59e5"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Endturn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""dc3141d9-32a7-4189-92d1-362d2f49a7df"",
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard"",
+                    ""groups"": "";Gamepad"",
                     ""action"": ""Endturn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -318,6 +329,257 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""7b294c8d-a9fd-47c2-8875-00cc3482c3fc"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Gameplay_alt"",
+            ""id"": ""ce278819-086e-4ab3-b60f-ffa75fa3dc89"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""b8918b06-c84f-4f5f-947c-596705c8349c"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Aim"",
+                    ""type"": ""Value"",
+                    ""id"": ""b099d393-1dc3-418c-91a3-1039aba9b50d"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""230a38b5-0d9b-4305-865f-18583d519d67"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Endturn"",
+                    ""type"": ""Button"",
+                    ""id"": ""83488777-6c26-4d3b-ab76-25461db344b8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""77a3f209-6fa1-4f44-b3c0-5fa2c6d3636c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""939811ae-16c9-413e-8852-cf9b988c0a50"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""ac39e9fb-ff07-48bf-b858-91f6b96b3913"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""f91b85a0-4c04-4bd4-afc0-46d8e26f8615"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""537d06b2-c396-4e51-b9f7-94d8b5470935"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""246accc8-264c-4a52-9029-ee33d220d025"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ce26fec6-ec6a-4c16-bb7b-ca64bd48b12c"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""837d9f26-3400-4eb5-a190-e45888a00214"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""891eb63f-fe66-47b9-ba3c-38ec8218acb2"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""f7156cc5-fe2b-4496-b6b1-71a9ebaf54ec"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""f93409a6-c5d5-4855-a03e-b2a0aac29ceb"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""882920cc-095e-4966-a6dd-b2ad97b69d75"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""02fd03a2-b08f-4510-873d-a0a61c734a79"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""310663c2-a03f-40ed-ab29-b66e0bae1a8b"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e5f93911-e117-4036-8636-a4a6a12c65e4"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7116f4e4-d5b9-4fe9-a38f-2ae0d1697b87"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Endturn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""546c0c48-6aca-470a-bc50-50d5e3d65d91"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Endturn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f7344104-5205-404d-8924-0fd13a08049d"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""13d713c7-4a5a-491e-b47e-95d9e419c799"",
                     ""path"": ""<Gamepad>/select"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -366,11 +628,19 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
         m_Gameplay_Fire = m_Gameplay.FindAction("Fire", throwIfNotFound: true);
         m_Gameplay_Endturn = m_Gameplay.FindAction("Endturn", throwIfNotFound: true);
         m_Gameplay_menu = m_Gameplay.FindAction("menu", throwIfNotFound: true);
+        // Gameplay_alt
+        m_Gameplay_alt = asset.FindActionMap("Gameplay_alt", throwIfNotFound: true);
+        m_Gameplay_alt_Move = m_Gameplay_alt.FindAction("Move", throwIfNotFound: true);
+        m_Gameplay_alt_Aim = m_Gameplay_alt.FindAction("Aim", throwIfNotFound: true);
+        m_Gameplay_alt_Fire = m_Gameplay_alt.FindAction("Fire", throwIfNotFound: true);
+        m_Gameplay_alt_Endturn = m_Gameplay_alt.FindAction("Endturn", throwIfNotFound: true);
+        m_Gameplay_alt_menu = m_Gameplay_alt.FindAction("menu", throwIfNotFound: true);
     }
 
     ~@TankControls()
     {
         UnityEngine.Debug.Assert(!m_Gameplay.enabled, "This will cause a leak and performance issues, TankControls.Gameplay.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Gameplay_alt.enabled, "This will cause a leak and performance issues, TankControls.Gameplay_alt.Disable() has not been called.");
     }
 
     /// <summary>
@@ -582,6 +852,146 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="GameplayActions" /> instance referencing this action map.
     /// </summary>
     public GameplayActions @Gameplay => new GameplayActions(this);
+
+    // Gameplay_alt
+    private readonly InputActionMap m_Gameplay_alt;
+    private List<IGameplay_altActions> m_Gameplay_altActionsCallbackInterfaces = new List<IGameplay_altActions>();
+    private readonly InputAction m_Gameplay_alt_Move;
+    private readonly InputAction m_Gameplay_alt_Aim;
+    private readonly InputAction m_Gameplay_alt_Fire;
+    private readonly InputAction m_Gameplay_alt_Endturn;
+    private readonly InputAction m_Gameplay_alt_menu;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "Gameplay_alt".
+    /// </summary>
+    public struct Gameplay_altActions
+    {
+        private @TankControls m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public Gameplay_altActions(@TankControls wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay_alt/Move".
+        /// </summary>
+        public InputAction @Move => m_Wrapper.m_Gameplay_alt_Move;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay_alt/Aim".
+        /// </summary>
+        public InputAction @Aim => m_Wrapper.m_Gameplay_alt_Aim;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay_alt/Fire".
+        /// </summary>
+        public InputAction @Fire => m_Wrapper.m_Gameplay_alt_Fire;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay_alt/Endturn".
+        /// </summary>
+        public InputAction @Endturn => m_Wrapper.m_Gameplay_alt_Endturn;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay_alt/menu".
+        /// </summary>
+        public InputAction @menu => m_Wrapper.m_Gameplay_alt_menu;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_Gameplay_alt; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="Gameplay_altActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(Gameplay_altActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="Gameplay_altActions" />
+        public void AddCallbacks(IGameplay_altActions instance)
+        {
+            if (instance == null || m_Wrapper.m_Gameplay_altActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_Gameplay_altActionsCallbackInterfaces.Add(instance);
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
+            @Aim.started += instance.OnAim;
+            @Aim.performed += instance.OnAim;
+            @Aim.canceled += instance.OnAim;
+            @Fire.started += instance.OnFire;
+            @Fire.performed += instance.OnFire;
+            @Fire.canceled += instance.OnFire;
+            @Endturn.started += instance.OnEndturn;
+            @Endturn.performed += instance.OnEndturn;
+            @Endturn.canceled += instance.OnEndturn;
+            @menu.started += instance.OnMenu;
+            @menu.performed += instance.OnMenu;
+            @menu.canceled += instance.OnMenu;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="Gameplay_altActions" />
+        private void UnregisterCallbacks(IGameplay_altActions instance)
+        {
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
+            @Aim.started -= instance.OnAim;
+            @Aim.performed -= instance.OnAim;
+            @Aim.canceled -= instance.OnAim;
+            @Fire.started -= instance.OnFire;
+            @Fire.performed -= instance.OnFire;
+            @Fire.canceled -= instance.OnFire;
+            @Endturn.started -= instance.OnEndturn;
+            @Endturn.performed -= instance.OnEndturn;
+            @Endturn.canceled -= instance.OnEndturn;
+            @menu.started -= instance.OnMenu;
+            @menu.performed -= instance.OnMenu;
+            @menu.canceled -= instance.OnMenu;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="Gameplay_altActions.UnregisterCallbacks(IGameplay_altActions)" />.
+        /// </summary>
+        /// <seealso cref="Gameplay_altActions.UnregisterCallbacks(IGameplay_altActions)" />
+        public void RemoveCallbacks(IGameplay_altActions instance)
+        {
+            if (m_Wrapper.m_Gameplay_altActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="Gameplay_altActions.AddCallbacks(IGameplay_altActions)" />
+        /// <seealso cref="Gameplay_altActions.RemoveCallbacks(IGameplay_altActions)" />
+        /// <seealso cref="Gameplay_altActions.UnregisterCallbacks(IGameplay_altActions)" />
+        public void SetCallbacks(IGameplay_altActions instance)
+        {
+            foreach (var item in m_Wrapper.m_Gameplay_altActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_Gameplay_altActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="Gameplay_altActions" /> instance referencing this action map.
+    /// </summary>
+    public Gameplay_altActions @Gameplay_alt => new Gameplay_altActions(this);
     private int m_KeyboardSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
@@ -614,6 +1024,49 @@ public partial class @TankControls: IInputActionCollection2, IDisposable
     /// <seealso cref="GameplayActions.AddCallbacks(IGameplayActions)" />
     /// <seealso cref="GameplayActions.RemoveCallbacks(IGameplayActions)" />
     public interface IGameplayActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "Move" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMove(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Aim" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAim(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Fire" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnFire(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Endturn" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnEndturn(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "menu" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMenu(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Gameplay_alt" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="Gameplay_altActions.AddCallbacks(IGameplay_altActions)" />
+    /// <seealso cref="Gameplay_altActions.RemoveCallbacks(IGameplay_altActions)" />
+    public interface IGameplay_altActions
     {
         /// <summary>
         /// Method invoked when associated input action "Move" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.

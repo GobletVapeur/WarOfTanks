@@ -7,6 +7,20 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TankController[] tanks;
 
     private int currentPlayerIndex;
+    public static GameManager instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Debug.LogWarning("Multiple GameManager instances detected. Destroying duplicate.");
+            Destroy(this);
+        }
+    }
 
     private void Start()
     {
@@ -27,15 +41,15 @@ public class GameManager : MonoBehaviour
         ActivatePlayer(currentPlayerIndex);
     }
 
-    private void Update()
-    {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
-        {
-            NextTurn();
-        }
-    }
+    //private void Update()
+    //{
+    //    if (Keyboard.current.spaceKey.wasPressedThisFrame)
+    //    {
+    //        NextTurn();
+    //    }
+    //}
 
-    private void NextTurn()
+    public void NextTurn()
     {
         // Fin du tour actuel
         DeactivatePlayer(currentPlayerIndex);

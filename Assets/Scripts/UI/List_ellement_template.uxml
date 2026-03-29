@@ -21,5 +21,6 @@
                 </Bindings>
             </ui:Label>
         </ui:VisualElement>
+        <ui:Button text="Button" name="remap"/>
     </ui:VisualElement>
 </ui:UXML>
