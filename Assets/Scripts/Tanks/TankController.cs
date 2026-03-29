@@ -231,7 +231,6 @@ public class TankController : MonoBehaviour
         if (minimapRenderer == null || enemyMaterial == null)
             return;
 
-        Debug.Log("ENEMY APPLIED on " + name);
         minimapRenderer.sharedMaterial = enemyMaterial;
     }
 }
