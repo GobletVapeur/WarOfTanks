@@ -26,7 +26,9 @@ public class menuManager : MonoBehaviour
     void Awake()
     {
         m_uiDocument = gameObject.GetComponent<UIDocument>();
-        menu_base= m_uiDocument.rootVisualElement.Q<VisualElement>("window");
+       
+        menu_base = m_uiDocument.rootVisualElement.Q<VisualElement>("window"); 
+        pop = m_uiDocument.rootVisualElement.Q<VisualElement>("Popup");
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
         LoadOverrides();
@@ -70,9 +72,11 @@ public class menuManager : MonoBehaviour
     }
     private InputActionRebindingExtensions.RebindingOperation rebind_opera_kebord;
     private InputActionRebindingExtensions.RebindingOperation rebind_opera_gamepad;
-
+    private VisualElement pop;
     private void OnRemapButtonPress(InputAction action)
     {
+       
+        pop.RemoveFromClassList("hidden");
         action.Disable();
         //rebind keybord
         rebind_opera_kebord = action.PerformInteractiveRebinding()
@@ -90,11 +94,13 @@ public class menuManager : MonoBehaviour
         rebind_opera_gamepad.Start();
         rebind_opera_gamepad.OnComplete(OnRebindComplete);
 
+
     }
 
     private void OnRebindComplete(InputActionRebindingExtensions.RebindingOperation operation)
-    {
+    {   pop.AddToClassList("hidden");
         DisplayControl();
+        
         operation.action.Enable();
         rebind_opera_gamepad.Cancel();
         rebind_opera_kebord.Cancel();

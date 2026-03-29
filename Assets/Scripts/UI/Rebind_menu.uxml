@@ -7,4 +7,7 @@
             <ui:ScrollView name="controlArea"/>
         </ui:VisualElement>
     </ui:VisualElement>
+    <ui:VisualElement name="Popup" class="hidden" style="flex-grow: 1; -unity-text-align: upper-center; background-color: rgba(0, 0, 0, 0.51);">
+        <ui:Label text="Apuiller sur une touche pour affecter au controle" name="Label" style="-unity-text-align: upper-center; -unity-font-style: italic; font-size: 15px; color: rgb(152, 152, 152);"/>
+    </ui:VisualElement>
 </ui:UXML>
