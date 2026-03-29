@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        UpdateHUDVisibility();
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             NextTurn();
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour
 
         // Prochain joueur
         currentPlayerIndex = (currentPlayerIndex + 1) % players.Length;
+        UpdateHUDVisibility();
 
         // Début du tour suivant
         ActivatePlayer(currentPlayerIndex);
@@ -82,5 +84,47 @@ public class GameManager : MonoBehaviour
     private void EndGame()
     {
         SceneManager.LoadScene("EndScreen");
+    }
+    private bool IsVisible(TankController from, TankController to)
+    {
+        Vector3 origin = from.HudAnchor.position;
+        Vector3 target = to.HudAnchor.position;
+
+        Vector3 dir = target - origin;
+
+        Ray ray = new Ray(origin, dir.normalized);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, dir.magnitude))
+        {
+            // si on frappe le tank visible
+            if (hit.collider.GetComponentInParent<TankController>() == to)
+                return true;
+
+            // sinon mur bloqué
+            return false;
+        }
+
+        return true;
+    }
+    
+    private void UpdateHUDVisibility()
+    {
+        TankController active = tanks[currentPlayerIndex];
+
+        for (int i = 0; i < tanks.Length; i++)
+        {
+            if (i == currentPlayerIndex) {
+                tanks[i].HideHUD();
+                continue;
+                
+            }
+
+            bool visible = IsVisible(active, tanks[i]);
+
+            if (visible)
+                tanks[i].ShowHUD();
+            else
+                tanks[i].HideHUD();
+        }
     }
 }

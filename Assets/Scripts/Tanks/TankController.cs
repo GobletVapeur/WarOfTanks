@@ -1,4 +1,5 @@
 using System;
+using Core;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -19,21 +20,38 @@ public class TankController : MonoBehaviour
     private Transform hudAnchor;
     public Vector2 moveInput;
     private bool controlsEnabled = true;
+    private WorldHUDController worldHUD;
 
     public TankStats Stats => stats;
     public bool ControlsEnabled => controlsEnabled;
     public Transform HudAnchor => hudAnchor;
+    public WorldHUDController WorldHUD => worldHUD;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         stats = GetComponent<TankStats>();
+
         hudAnchor = transform.Find("HudAnchor");
-        
+        if (hudAnchor == null)
+        {
+            Debug.LogError("HudAnchor not found on " + name);
+        }
+
         if (turret == null)
         {
             turret = GetComponentInChildren<TurretController>();
         }
+
+        worldHUD = GetComponentInChildren<WorldHUDController>();
+        if (worldHUD == null)
+        {
+            Debug.LogError("WorldHUDController not found on " + name);
+            return;
+        }
+
+        worldHUD.Initialize(this);
+        worldHUD.SetVisible(false);
     }
 
     private void FixedUpdate()
@@ -208,6 +226,16 @@ public class TankController : MonoBehaviour
         }
 
         stats.ConsumeStamina(totalCost);
+    }
+    
+    public void ShowHUD()
+    {
+        worldHUD?.SetVisible(true);
+    }
+
+    public void HideHUD()
+    {
+        worldHUD?.SetVisible(false);
     }
     
 }
