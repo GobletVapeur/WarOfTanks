@@ -12,6 +12,11 @@ public class TurretController : MonoBehaviour
     private Vector2 aimInput;
     private bool controlsEnabled = true;
     public float TurnSpeed => turnSpeed;
+    public Vector2 AimInput => aimInput;
+    public float PitchSpeed => pitchSpeed;
+    public float MinPitch => minPitch;
+    public float MaxPitch => maxPitch;
+    public bool InvertPitch => invertPitch;
 
     private void Update()
     {
