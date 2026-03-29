@@ -16,17 +16,19 @@ public class TankController : MonoBehaviour
 
     private Rigidbody rb;
     private TankStats stats;
-
+    private Transform hudAnchor;
     public Vector2 moveInput;
     private bool controlsEnabled = true;
 
     public TankStats Stats => stats;
     public bool ControlsEnabled => controlsEnabled;
+    public Transform HudAnchor => hudAnchor;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         stats = GetComponent<TankStats>();
+        hudAnchor = transform.Find("HudAnchor");
         
         if (turret == null)
         {
