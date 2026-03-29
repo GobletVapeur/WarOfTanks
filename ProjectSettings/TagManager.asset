@@ -15,8 +15,8 @@ TagManager:
   - Obstacle
   - Projectile
   - Pickup
-  - MinimapOnly
-  - HUDBlocker
+  - MinimapVisible
+  - MinimapIcon
   - 
   - 
   - 

@@ -1,4 +1,5 @@
 using System;
+using Core;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -9,31 +10,51 @@ public class TankController : MonoBehaviour
     [SerializeField] private float moveSpeed = 6f;
     [SerializeField] private float turnSpeed = 120f;
     [SerializeField] private TurretController turret;
+
     [Header("Weapons")]
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform firePoint;
     [SerializeField] private float projectileSpeed = 25f;
+
+    [Header("Minimap")]
+    [SerializeField] private GameObject minimapIcon;
+    [SerializeField] private Renderer minimapRenderer;
+    [SerializeField] private Material allyMaterial;
+    [SerializeField] private Material enemyMaterial;
 
     private Rigidbody rb;
     private TankStats stats;
     private Transform hudAnchor;
     public Vector2 moveInput;
     private bool controlsEnabled = true;
+    private WorldHUDController worldHUD;
 
     public TankStats Stats => stats;
     public bool ControlsEnabled => controlsEnabled;
     public Transform HudAnchor => hudAnchor;
+    public WorldHUDController WorldHUD => worldHUD;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         stats = GetComponent<TankStats>();
+
         hudAnchor = transform.Find("HudAnchor");
-        
+        if (hudAnchor == null)
+            Debug.LogError("HudAnchor not found on " + name);
+
         if (turret == null)
-        {
             turret = GetComponentInChildren<TurretController>();
+
+        worldHUD = GetComponentInChildren<WorldHUDController>();
+        if (worldHUD == null)
+        {
+            Debug.LogError("WorldHUDController not found on " + name);
+            return;
         }
+
+        worldHUD.Initialize(this);
+        worldHUD.SetVisible(false);
     }
 
     private void FixedUpdate()
@@ -43,19 +64,17 @@ public class TankController : MonoBehaviour
             turret?.SetAimInput(Vector2.zero);
             return;
         }
-       
+
         HandleTurretStamina();
         MoveTank();
         RotateTank();
     }
+
     public void fire()
-    { 
+    {
         if (!controlsEnabled)
             return;
 
-  
-
-        // Determine spawn position and rotation: prefer explicit firePoint, then turret barrel, then tank forward
         Transform barrel = turret != null ? turret.Barrel : null;
         Vector3 spawnPos = firePoint != null ? firePoint.position : (barrel != null ? barrel.position : transform.position + transform.forward * 1.5f);
         Quaternion spawnRot = firePoint != null ? firePoint.rotation : (barrel != null ? barrel.rotation : transform.rotation);
@@ -64,11 +83,8 @@ public class TankController : MonoBehaviour
 
         Rigidbody projRb = proj.GetComponent<Rigidbody>();
         if (projRb != null)
-        {
             projRb.linearVelocity = spawnRot * Vector3.forward * projectileSpeed;
-        }
 
-        // Destroy projectile after 5 seconds to avoid lingering objects
         Destroy(proj, 5f);
     }
 
@@ -79,11 +95,8 @@ public class TankController : MonoBehaviour
 
         if (requestedDistance <= 0f || !stats.HasStamina)
         {
-             if (rb != null)
-            {
-                rb.linearVelocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
-            }
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
             return;
         }
 
@@ -92,13 +105,10 @@ public class TankController : MonoBehaviour
             return;
 
         float direction = signedRequestedDistance > 0f ? 1f : -1f;
-
         Vector3 movement = transform.forward * (allowedDistance * direction);
 
         rb.MovePosition(rb.position + movement);
-
         stats.ConsumeStamina(allowedDistance);
-        
     }
 
     private void RotateTank()
@@ -109,7 +119,6 @@ public class TankController : MonoBehaviour
             return;
 
         float rotation = input * turnSpeed * Time.fixedDeltaTime;
-
         float cost = Mathf.Abs(rotation) * stats.RotationStaminaCostPerDegree;
 
         if (cost > stats.CurrentStamina)
@@ -132,11 +141,8 @@ public class TankController : MonoBehaviour
         }
     }
 
-    public void SetMoveInput(Vector2 input)
-    {
-        moveInput = input;
-    }
-    
+    public void SetMoveInput(Vector2 input) => moveInput = input;
+
     public void SetAimInput(Vector2 input)
     {
         if (!controlsEnabled || turret == null)
@@ -155,7 +161,7 @@ public class TankController : MonoBehaviour
     {
         SetControlEnabled(false);
     }
-    
+
     private void HandleTurretStamina()
     {
         if (turret == null)
@@ -170,14 +176,12 @@ public class TankController : MonoBehaviour
         Vector2 input = turret.AimInput;
         float totalCost = 0f;
 
-        // --- YAW (horizontal) ---
         if (Mathf.Abs(input.x) >= 0.01f)
         {
             float yawRotation = input.x * turret.TurnSpeed * Time.fixedDeltaTime;
             totalCost += Mathf.Abs(yawRotation) * stats.TurretStaminaCostPerDegree;
         }
 
-        // --- PITCH (vertical, avec clamp correct) ---
         float correctedY = turret.InvertPitch ? input.y : -input.y;
 
         if (Mathf.Abs(correctedY) >= 0.01f)
@@ -188,14 +192,8 @@ public class TankController : MonoBehaviour
             float delta = correctedY * turret.PitchSpeed * Time.fixedDeltaTime;
             float target = current + delta;
 
-            bool blocked =
-                target > turret.MaxPitch ||
-                target < turret.MinPitch;
-
-            if (!blocked)
-            {
+            if (target <= turret.MaxPitch && target >= turret.MinPitch)
                 totalCost += Mathf.Abs(delta) * stats.TurretStaminaCostPerDegree;
-            }
         }
 
         if (totalCost <= 0f)
@@ -209,5 +207,31 @@ public class TankController : MonoBehaviour
 
         stats.ConsumeStamina(totalCost);
     }
+
+    public void ShowHUD() => worldHUD?.SetVisible(true);
+    public void HideHUD() => worldHUD?.SetVisible(false);
     
+
+    public void SetMinimapVisible(bool visible)
+    {
+        if (minimapIcon != null)
+            minimapIcon.SetActive(visible);
+    }
+
+    public void SetMinimapAsAlly()
+    {
+        if (minimapRenderer == null || allyMaterial == null)
+            return;
+
+        minimapRenderer.sharedMaterial = allyMaterial;
+    }
+
+    public void SetMinimapAsEnemy()
+    {
+        if (minimapRenderer == null || enemyMaterial == null)
+            return;
+
+        Debug.Log("ENEMY APPLIED on " + name);
+        minimapRenderer.sharedMaterial = enemyMaterial;
+    }
 }
