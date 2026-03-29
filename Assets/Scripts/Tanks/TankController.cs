@@ -16,17 +16,19 @@ public class TankController : MonoBehaviour
 
     private Rigidbody rb;
     private TankStats stats;
-
+    private Transform hudAnchor;
     public Vector2 moveInput;
     private bool controlsEnabled = true;
 
     public TankStats Stats => stats;
     public bool ControlsEnabled => controlsEnabled;
+    public Transform HudAnchor => hudAnchor;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         stats = GetComponent<TankStats>();
+        hudAnchor = transform.Find("HudAnchor");
         
         if (turret == null)
         {
@@ -36,11 +38,13 @@ public class TankController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!controlsEnabled)
+        if (!controlsEnabled || !stats.HasStamina)
         {
+            turret?.SetAimInput(Vector2.zero);
             return;
         }
        
+        HandleTurretStamina();
         MoveTank();
         RotateTank();
     }
@@ -92,15 +96,28 @@ public class TankController : MonoBehaviour
 
         rb.MovePosition(rb.position + movement);
 
-        stats.ConsumeMovement(allowedDistance);
+        stats.ConsumeStamina(allowedDistance);
+        
     }
 
     private void RotateTank()
     {
-        float rotation = moveInput.x * turnSpeed * Time.fixedDeltaTime;
-        Quaternion turn = Quaternion.Euler(0f, rotation, 0f);
+        float input = moveInput.x;
 
+        if (Mathf.Abs(input) < 0.01f)
+            return;
+
+        float rotation = input * turnSpeed * Time.fixedDeltaTime;
+
+        float cost = Mathf.Abs(rotation) * stats.RotationStaminaCostPerDegree;
+
+        if (cost > stats.CurrentStamina)
+            return;
+
+        Quaternion turn = Quaternion.Euler(0f, rotation, 0f);
         rb.MoveRotation(rb.rotation * turn);
+
+        stats.ConsumeStamina(cost);
     }
 
     public void SetControlEnabled(bool enabled)
@@ -121,11 +138,8 @@ public class TankController : MonoBehaviour
     
     public void SetAimInput(Vector2 input)
     {
-        if (turret == null)
-        {
-            Debug.LogError(name + " has no TurretController!");
+        if (!controlsEnabled || turret == null)
             return;
-        }
 
         turret.SetAimInput(input);
     }
@@ -140,4 +154,59 @@ public class TankController : MonoBehaviour
     {
         SetControlEnabled(false);
     }
+    
+    private void HandleTurretStamina()
+    {
+        if (turret == null)
+            return;
+
+        if (!stats.HasStamina)
+        {
+            turret.SetAimInput(Vector2.zero);
+            return;
+        }
+
+        Vector2 input = turret.AimInput;
+        float totalCost = 0f;
+
+        // --- YAW (horizontal) ---
+        if (Mathf.Abs(input.x) >= 0.01f)
+        {
+            float yawRotation = input.x * turret.TurnSpeed * Time.fixedDeltaTime;
+            totalCost += Mathf.Abs(yawRotation) * stats.TurretStaminaCostPerDegree;
+        }
+
+        // --- PITCH (vertical, avec clamp correct) ---
+        float correctedY = turret.InvertPitch ? input.y : -input.y;
+
+        if (Mathf.Abs(correctedY) >= 0.01f)
+        {
+            float current = turret.Barrel.localEulerAngles.x;
+            if (current > 180f) current -= 360f;
+
+            float delta = correctedY * turret.PitchSpeed * Time.fixedDeltaTime;
+            float target = current + delta;
+
+            bool blocked =
+                target > turret.MaxPitch ||
+                target < turret.MinPitch;
+
+            if (!blocked)
+            {
+                totalCost += Mathf.Abs(delta) * stats.TurretStaminaCostPerDegree;
+            }
+        }
+
+        if (totalCost <= 0f)
+            return;
+
+        if (totalCost > stats.CurrentStamina)
+        {
+            turret.SetAimInput(Vector2.zero);
+            return;
+        }
+
+        stats.ConsumeStamina(totalCost);
+    }
+    
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5468689992010790403}
   - component: {fileID: 1901223054010499718}
   - component: {fileID: 835996718374865032}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 7018272746584434429}
   - component: {fileID: 1216408725843197566}
   - component: {fileID: 6590296523581760984}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 4054470402821689259}
   - component: {fileID: 609942367839234384}
   - component: {fileID: 153267036433460406}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -372,7 +372,7 @@ GameObject:
   - component: {fileID: 1266853271680228324}
   - component: {fileID: 5638643183019520503}
   - component: {fileID: 1445558400856869738}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -480,6 +480,9 @@ MonoBehaviour:
   startingStamina: 50
   staminaRegenPerTurn: 5
   movementStaminaCostPerUnit: 1
+  turretStaminaCostPerDegree: 0.01
+  rotationStaminaCostPerDegree: 0.05
+  maxHealth: 100
 --- !u!1 &7494691119926107373
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,7 +493,7 @@ GameObject:
   m_Component:
   - component: {fileID: 36906621190099021}
   - component: {fileID: 2770314901239860654}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

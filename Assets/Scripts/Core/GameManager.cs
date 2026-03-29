@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private PlayerController[] players;
     [SerializeField] private TankController[] tanks;
+    [SerializeField] private HUDManager hud;
 
     private int currentPlayerIndex;
     public static GameManager instance;
@@ -51,6 +53,7 @@ public class GameManager : MonoBehaviour
 
     public void NextTurn()
     {
+        CheckEndGame();
         // Fin du tour actuel
         DeactivatePlayer(currentPlayerIndex);
 
@@ -65,11 +68,33 @@ public class GameManager : MonoBehaviour
     {
         players[index].SetActive(true);
         tanks[index].BeginTurn();
+        hud.SetActiveTank(tanks[index]);
     }
 
     private void DeactivatePlayer(int index)
     {
         players[index].SetActive(false);
         tanks[index].EndTurn();
+    }
+    
+    private void CheckEndGame()
+    {
+        int aliveCount = 0;
+
+        foreach (var tank in tanks)
+        {
+            if (tank.Stats.IsAlive)
+                aliveCount++;
+        }
+
+        if (aliveCount <= 1)
+        {
+            EndGame();
+        }
+    }
+    
+    private void EndGame()
+    {
+        SceneManager.LoadScene("EndScreen");
     }
 }

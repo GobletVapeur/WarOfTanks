@@ -8,19 +8,27 @@ public class TankStats : MonoBehaviour
     [SerializeField] private string tankId = "Tank";
 
     [Header("Stamina")]
-    [SerializeField] private float maxStamina = 50f;
-    [SerializeField] private float startingStamina = 50f;
-    [SerializeField] private float staminaRegenPerTurn = 30f;
+    [SerializeField] private float maxStamina = 20f;
+    [SerializeField] private float startingStamina = 20f;
+    [SerializeField] private float staminaRegenPerTurn = 10f;
     [SerializeField] private float movementStaminaCostPerUnit = 1f;
-
+    [SerializeField] private float turretStaminaCostPerDegree = 0.01f;
+    [SerializeField] private float rotationStaminaCostPerDegree = 0.05f;
+    [SerializeField] private float maxHealth = 100f;
+    
     public event Action<TankStats> StaminaChanged;
-
+    public float TurretStaminaCostPerDegree => turretStaminaCostPerDegree;
     public string TankId => tankId;
     public float MaxStamina => maxStamina;
     public float CurrentStamina { get; private set; }
+    public bool HasStamina => CurrentStamina > 0f;
     public float StaminaRegenPerTurn => staminaRegenPerTurn;
     public float MovementStaminaCostPerUnit => movementStaminaCostPerUnit;
-    public bool HasStamina => CurrentStamina > 0f;
+    public float RotationStaminaCostPerDegree => rotationStaminaCostPerDegree;
+    public float MaxHealth => maxHealth;
+    public float CurrentHealth { get; private set; }
+    public bool IsAlive => CurrentHealth > 0f;
+    
 
     private void Awake()
     {
@@ -30,6 +38,7 @@ public class TankStats : MonoBehaviour
         movementStaminaCostPerUnit = Mathf.Max(0f, movementStaminaCostPerUnit);
 
         CurrentStamina = startingStamina;
+        CurrentHealth = maxHealth;
     }
 
     public void RegenerateForTurnStart()
@@ -55,27 +64,17 @@ public class TankStats : MonoBehaviour
         return Mathf.Min(sanitizedDistance, maxDistance);
     }
 
-    public bool ConsumeMovement(float travelledDistance)
+    public bool ConsumeStamina(float amount)
     {
-        float sanitizedDistance = Mathf.Max(0f, travelledDistance);
+        float sanitizedAmount = Mathf.Max(0f, amount);
 
-        if (sanitizedDistance <= 0f)
-        {
+        if (sanitizedAmount <= 0f)
             return true;
-        }
 
-        if (movementStaminaCostPerUnit <= 0f)
-        {
-            return true;
-        }
-
-        float staminaCost = sanitizedDistance * movementStaminaCostPerUnit;
-        if (staminaCost > CurrentStamina)
-        {
+        if (sanitizedAmount > CurrentStamina)
             return false;
-        }
 
-        SetCurrentStamina(CurrentStamina - staminaCost);
+        SetCurrentStamina(CurrentStamina - sanitizedAmount);
         return true;
     }
 
@@ -89,6 +88,14 @@ public class TankStats : MonoBehaviour
 
         CurrentStamina = clampedValue;
         StaminaChanged?.Invoke(this);
+    }
+    
+    public void TakeDamage(float amount)
+    {
+        if (amount <= 0f || !IsAlive)
+            return;
+
+        CurrentHealth = Mathf.Max(CurrentHealth - amount, 0f);
     }
 
     internal bool ConsumeFire()
