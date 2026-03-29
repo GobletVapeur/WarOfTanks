@@ -90,4 +90,14 @@ public class TankStats : MonoBehaviour
         CurrentStamina = clampedValue;
         StaminaChanged?.Invoke(this);
     }
+
+    internal bool ConsumeFire()
+    {   
+        if (CurrentStamina < 15f)
+        {
+            return false;
+        }
+        CurrentStamina -=15f;   
+        return true;
+    }
 }

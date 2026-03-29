@@ -1,0 +1,33 @@
+:root {
+}
+
+.hidden {
+    display: none;
+}
+
+#background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.window {
+    width: 600px;
+    max-width: 90%;
+    min-height: 200px;
+    background-color: rgb(87, 176, 114);
+    -unity-background-image-tint-color: rgba(44, 112, 47, 0.97);
+    padding: 20px;
+   
+}
+
+.col_entry {
+    flex-grow: 1;
+    color: rgb(26, 26, 26);
+}

@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
         controls.Gameplay.Aim.performed += ctx => tank.SetAimInput(ctx.ReadValue<Vector2>());
         controls.Gameplay.Aim.canceled += ctx => tank.SetAimInput(Vector2.zero);
         controls.Gameplay.Fire.performed += ctx => tank.fire();
+        controls.Gameplay.menu.performed += ctx => menuManager.instance?.MenuButton();
         controls.Gameplay.Enable();
     }
 

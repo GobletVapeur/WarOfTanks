@@ -49,7 +49,8 @@ public class TankController : MonoBehaviour
         if (!controlsEnabled)
             return;
 
-  
+       if(!stats.ConsumeFire())
+            return;
 
         // Determine spawn position and rotation: prefer explicit firePoint, then turret barrel, then tank forward
         Transform barrel = turret != null ? turret.Barrel : null;
@@ -59,11 +60,9 @@ public class TankController : MonoBehaviour
         GameObject proj = Instantiate(projectilePrefab, spawnPos, spawnRot);
 
         Rigidbody projRb = proj.GetComponent<Rigidbody>();
-        if (projRb != null)
-        {
-            projRb.linearVelocity = spawnRot * Vector3.forward * projectileSpeed;
-        }
-
+  
+        projRb.linearVelocity = spawnRot * Vector3.forward * projectileSpeed;
+      
         // Destroy projectile after 5 seconds to avoid lingering objects
         Destroy(proj, 5f);
     }
