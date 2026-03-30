@@ -38,14 +38,14 @@ public class GameManager : MonoBehaviour
             NextTurn();
             CheckEndGame();
         }
-        UpdateHUDVisibility();
+        UpdateVisibilityState();
     }
 
     private void NextTurn()
     {
         DeactivatePlayer(currentPlayerIndex);
         currentPlayerIndex = (currentPlayerIndex + 1) % players.Length;
-        UpdateHUDVisibility();
+        UpdateVisibilityState();
         ActivatePlayer(currentPlayerIndex);
     }
 
@@ -104,32 +104,41 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
-    private void UpdateHUDVisibility()
+    private void UpdateVisibilityState()
     {
         TankController active = tanks[currentPlayerIndex];
 
-        // 1. Reset tout
         foreach (var tank in tanks)
         {
-            tank.SetMinimapVisible(false);
-        }
-
-        // 2. Actif (toujours visible + vert)
-        active.SetMinimapVisible(true);
-        active.SetMinimapAsAlly();
-
-        // 3. Ennemis
-        foreach (var tank in tanks)
-        {
+            // Le joueur actif est toujours visible
             if (tank == active)
+            {
+                tank.gameObject.SetActive(true);
+
+                tank.HideHUD();
+
+                tank.SetMinimapVisible(true);
+                tank.SetMinimapAsAlly();
+
                 continue;
+            }
 
             bool visible = IsVisible(active, tank);
 
+            // Visibilité dans la scène
+            tank.gameObject.SetActive(visible);
+
+            // Si le tank est visible, on peut afficher HUD + minimap
             if (visible)
             {
+                tank.ShowHUD();
                 tank.SetMinimapVisible(true);
                 tank.SetMinimapAsEnemy();
+            }
+            else
+            {
+                tank.HideHUD();
+                tank.SetMinimapVisible(false);
             }
         }
     }
