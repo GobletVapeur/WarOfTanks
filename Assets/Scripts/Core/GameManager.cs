@@ -7,7 +7,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerController[] players;
     [SerializeField] private TankController[] tanks;
     [SerializeField] private HUDManager hud;
-    [SerializeField] private MinimapManager minimap; // ← AJOUTÉ
+    [SerializeField] private MinimapManager minimap; 
+    [SerializeField] private CameraFollowTurret mainCamera;
 
     private int currentPlayerIndex;
     public static GameManager instance;
@@ -56,9 +57,18 @@ public class GameManager : MonoBehaviour
     {
         CheckEndGame();
         // Fin du tour actuel
+    private void Update()
+    {
+        
+
+        UpdateVisibilityState();
+    }
+
+    private void NextTurn()
+    {
         DeactivatePlayer(currentPlayerIndex);
         currentPlayerIndex = (currentPlayerIndex + 1) % players.Length;
-        UpdateHUDVisibility();
+  
         ActivatePlayer(currentPlayerIndex);
     }
 
@@ -67,6 +77,7 @@ public class GameManager : MonoBehaviour
         players[index].SetActive(true);
         tanks[index].BeginTurn();
         hud.SetActiveTank(tanks[index]);
+        mainCamera.SetTarget(tanks[index]);
         minimap.SetTarget(tanks[index].transform);
     }
 
@@ -117,32 +128,41 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
-    private void UpdateHUDVisibility()
+    private void UpdateVisibilityState()
     {
         TankController active = tanks[currentPlayerIndex];
 
-        // 1. Reset tout
         foreach (var tank in tanks)
         {
-            tank.SetMinimapVisible(false);
-        }
-
-        // 2. Actif (toujours visible + vert)
-        active.SetMinimapVisible(true);
-        active.SetMinimapAsAlly();
-
-        // 3. Ennemis
-        foreach (var tank in tanks)
-        {
+            // Le joueur actif est toujours visible
             if (tank == active)
+            {
+                tank.gameObject.SetActive(true);
+
+                tank.HideHUD();
+
+                tank.SetMinimapVisible(true);
+                tank.SetMinimapAsAlly();
+
                 continue;
+            }
 
             bool visible = IsVisible(active, tank);
 
+            // Visibilité dans la scène
+            tank.gameObject.SetActive(visible);
+
+            // Si le tank est visible, on peut afficher HUD + minimap
             if (visible)
             {
+                tank.ShowHUD();
                 tank.SetMinimapVisible(true);
                 tank.SetMinimapAsEnemy();
+            }
+            else
+            {
+                tank.HideHUD();
+                tank.SetMinimapVisible(false);
             }
         }
     }

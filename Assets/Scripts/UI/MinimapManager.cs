@@ -12,10 +12,13 @@ public class MinimapManager : MonoBehaviour
     {
         if (_target == null) return;
 
+        // Position au-dessus du joueur actif
         Vector3 pos = _target.position;
         pos.y = cameraHeight;
 
         minimapCamera.transform.position = pos;
+
+        // Rotation FIXE (top-down)
         minimapCamera.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
     }
 
