@@ -100,11 +100,11 @@ public class TankStats : MonoBehaviour
 
     internal bool ConsumeFire()
     {   
-        if (CurrentStamina < 15f)
+        if (CurrentStamina  >5f)
         {
             return false;
         }
-        CurrentStamina -=15f;   
+        CurrentStamina -=5f;   
         return true;
     }
 }
