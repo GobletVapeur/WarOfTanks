@@ -53,10 +53,7 @@ public class GameManager : MonoBehaviour
     //    }
     //}
 
-    public void NextTurn()
-    {
-        CheckEndGame();
-        // Fin du tour actuel
+
     private void Update()
     {
         
@@ -64,7 +61,7 @@ public class GameManager : MonoBehaviour
         UpdateVisibilityState();
     }
 
-    private void NextTurn()
+    public void NextTurn()
     {
         DeactivatePlayer(currentPlayerIndex);
         currentPlayerIndex = (currentPlayerIndex + 1) % players.Length;
