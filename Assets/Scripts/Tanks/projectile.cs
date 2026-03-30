@@ -1,16 +1,18 @@
 using UnityEngine;
 
-public class projectile : MonoBehaviour
+public class Projectile : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void OnCollisionEnter(Collision collision)
     {
-        
-    }
+        TankController tank = collision.collider.GetComponentInParent<TankController>();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (tank != null)
+        {
+            tank.Stats.TakeDamage(30f);
+            
+            GameManager.instance.CheckEndGame();
+        }
+
+        Destroy(gameObject);
     }
 }

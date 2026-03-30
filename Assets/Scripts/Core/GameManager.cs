@@ -56,7 +56,10 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            NextTurn();
+        }
 
         UpdateVisibilityState();
     }
@@ -64,9 +67,12 @@ public class GameManager : MonoBehaviour
     public void NextTurn()
     {
         DeactivatePlayer(currentPlayerIndex);
+
         currentPlayerIndex = (currentPlayerIndex + 1) % players.Length;
-  
+
         ActivatePlayer(currentPlayerIndex);
+
+        CheckEndGame(); // ← déplacé ici
     }
 
     private void ActivatePlayer(int index)
@@ -84,7 +90,7 @@ public class GameManager : MonoBehaviour
         tanks[index].EndTurn();
     }
 
-    private void CheckEndGame()
+    public void CheckEndGame()
     {
         int aliveCount = 0;
 

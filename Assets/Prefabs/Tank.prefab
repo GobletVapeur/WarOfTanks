@@ -131,8 +131,8 @@ MonoBehaviour:
   turnSpeed: 120
   barrel: {fileID: 1926638195153478892}
   pitchSpeed: 60
-  minPitch: -30
-  maxPitch: 10
+  minPitch: 0
+  maxPitch: 20
   invertPitch: 0
 --- !u!1 &490594525967389490
 GameObject:
@@ -660,7 +660,7 @@ MonoBehaviour:
   turret: {fileID: 835996718374865032}
   projectilePrefab: {fileID: 412850919900933036, guid: a8fa2e84d8d738c47bc11813dcb7d290, type: 3}
   firePoint: {fileID: 36906621190099021}
-  projectileSpeed: 15
+  projectileSpeed: 120
   minimapIcon: {fileID: 6047786918553137127}
   minimapRenderer: {fileID: 1193740457582493742}
   allyMaterial: {fileID: 2100000, guid: dc36fa247b3f44148b306ca1a95605a6, type: 2}
