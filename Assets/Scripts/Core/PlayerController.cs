@@ -127,14 +127,9 @@ public class PlayerController : MonoBehaviour
             playerInput.onControlsChanged -= OnControlsChanged;
     }
     public void OnEndturn(InputValue value)
-    {
-        if (isActive)
-        {
-        GameManager.instance?.NextTurn();
-        SetActive(false);
-        }
-      
-    }
+{
+    GameManager.instance.NextTurn();
+}
     public void OnMenu(InputValue value)
     {
         if(isActive)
