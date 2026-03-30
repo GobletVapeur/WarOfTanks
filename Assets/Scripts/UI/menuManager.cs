@@ -27,17 +27,21 @@ public class menuManager : MonoBehaviour
     private EventCallback<ChangeEvent<bool>> leftToggleCallback;
     private EventCallback<ChangeEvent<bool>> rightToggleCallback;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         m_uiDocument = gameObject.GetComponent<UIDocument>();
-       
         menu_base = m_uiDocument.rootVisualElement.Q<VisualElement>("window"); 
         pop = m_uiDocument.rootVisualElement.Q<VisualElement>("Popup");
+
+        menu_base.AddToClassList("hidden");
+
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+
         LoadOverrides();
     }
+    
+    
     public void MenuButton()
     {
         if(menu_on)
