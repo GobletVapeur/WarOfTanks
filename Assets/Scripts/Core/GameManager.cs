@@ -7,7 +7,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerController[] players;
     [SerializeField] private TankController[] tanks;
     [SerializeField] private HUDManager hud;
-    [SerializeField] private MinimapManager minimap; // ← AJOUTÉ
+    [SerializeField] private MinimapManager minimap; 
+    [SerializeField] private CameraFollowTurret mainCamera;
 
     private int currentPlayerIndex;
 
@@ -54,6 +55,7 @@ public class GameManager : MonoBehaviour
         players[index].SetActive(true);
         tanks[index].BeginTurn();
         hud.SetActiveTank(tanks[index]);
+        mainCamera.SetTarget(tanks[index]);
         minimap.SetTarget(tanks[index].transform);
     }
 
