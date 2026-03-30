@@ -97,4 +97,14 @@ public class TankStats : MonoBehaviour
 
         CurrentHealth = Mathf.Max(CurrentHealth - amount, 0f);
     }
+
+    internal bool ConsumeFire()
+    {   
+        if (CurrentStamina  >5f)
+        {
+            return false;
+        }
+        CurrentStamina -=5f;   
+        return true;
+    }
 }

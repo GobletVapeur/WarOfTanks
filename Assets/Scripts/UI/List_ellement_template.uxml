@@ -1,0 +1,26 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="List_ellement" data-source-type="UnityEngine.InputSystem.InputAction, Unity.InputSystem" class="row" style="flex-grow: 1; justify-content: center; align-self: flex-start; flex-direction: row;">
+        <ui:VisualElement name="action_key" class="col_entry">
+            <ui:Label text="Assigner sur" enable-rich-text="false" name="control_Name" style="white-space: pre; width: 103px;">
+                <Bindings>
+                    <ui:DataBinding property="text" data-source-path="m_Name" binding-mode="ToTarget"/>
+                </Bindings>
+            </ui:Label>
+        </ui:VisualElement>
+        <ui:VisualElement name="action" class="col_entry" style="flex-grow: 1;">
+            <ui:Label text="Label" name="kebord_key">
+                <Bindings>
+                    <Custom_Binding_control property="text"/>
+                </Bindings>
+            </ui:Label>
+        </ui:VisualElement>
+        <ui:VisualElement name="action_control" class="col_entry" style="flex-grow: 1;">
+            <ui:Label text="Label" name="Control_key" style="-unity-text-align: middle-left; white-space: pre;">
+                <Bindings>
+                    <Custom_Binding_control property="text" device="Gamepad"/>
+                </Bindings>
+            </ui:Label>
+        </ui:VisualElement>
+        <ui:Button text="Button" name="remap"/>
+    </ui:VisualElement>
+</ui:UXML>

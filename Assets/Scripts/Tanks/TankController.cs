@@ -75,15 +75,32 @@ public class TankController : MonoBehaviour
         if (!controlsEnabled)
             return;
 
+       if(!stats.ConsumeFire())
+            return;
+
+        // Determine spawn position and rotation: prefer explicit firePoint, then turret barrel, then tank forward
         Transform barrel = turret != null ? turret.Barrel : null;
         Vector3 spawnPos = firePoint != null ? firePoint.position : (barrel != null ? barrel.position : transform.position + transform.forward * 1.5f);
         Quaternion spawnRot = firePoint != null ? firePoint.rotation : (barrel != null ? barrel.rotation : transform.rotation);
 
+        if (projectilePrefab == null)
+        {
+            Debug.LogError("TankController: projectilePrefab is not assigned on " + name + ". Cannot fire.");
+            return;
+        }
+
         GameObject proj = Instantiate(projectilePrefab, spawnPos, spawnRot);
 
         Rigidbody projRb = proj.GetComponent<Rigidbody>();
-        if (projRb != null)
-            projRb.linearVelocity = spawnRot * Vector3.forward * projectileSpeed;
+        if (projRb == null)
+        {
+            // Try to add a Rigidbody if missing so the projectile can move, but warn the developer.
+            Debug.LogWarning("Projectile prefab " + projectilePrefab.name + " has no Rigidbody. Adding one at runtime.");
+            projRb = proj.AddComponent<Rigidbody>();
+        }
+
+        // Use the correct Rigidbody property 'velocity' to set linear speed
+        projRb.linearVelocity = spawnRot * Vector3.forward * projectileSpeed;
 
         Destroy(proj, 5f);
     }
