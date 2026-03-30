@@ -21,6 +21,11 @@ public class menuManager : MonoBehaviour
     private VisualTreeAsset list_template;
 
     public event Action<string> onActionMapSwich;
+    // Invoked when the "Invert Left Joystick" or "Invert Right Joystick" toggles change.
+    public event Action<bool> onInvertLeftJoystickToggle;
+    public event Action<bool> onInvertRightJoystickToggle;
+    private EventCallback<ChangeEvent<bool>> leftToggleCallback;
+    private EventCallback<ChangeEvent<bool>> rightToggleCallback;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -123,6 +128,34 @@ public class menuManager : MonoBehaviour
             button.AddToClassList("controlPresetButton");
             toggleGroup.Add(button);
         }
+        // Try to find/create toggles for left and right joystick inversion
+        UnityEngine.UIElements.Toggle leftToggle = menu_base.Q<UnityEngine.UIElements.Toggle>("invertLeftJoystickToggle");
+        if (leftToggle == null)
+        {
+            leftToggle = new UnityEngine.UIElements.Toggle("Invert Left Joystick");
+            leftToggle.name = "invertLeftJoystickToggle";
+            toggleGroup.parent?.Add(leftToggle);
+        }
+
+        UnityEngine.UIElements.Toggle rightToggle = menu_base.Q<UnityEngine.UIElements.Toggle>("invertRightJoystickToggle");
+        if (rightToggle == null)
+        {
+            rightToggle = new UnityEngine.UIElements.Toggle("Invert Right Joystick");
+            rightToggle.name = "invertRightJoystickToggle";
+            toggleGroup.parent?.Add(rightToggle);
+        }
+
+        // Register callbacks safely: if a previous callback exists, unregister it first to avoid duplicates.
+        if (leftToggleCallback != null)
+            leftToggle.UnregisterCallback(leftToggleCallback);
+        leftToggleCallback = evt => { onInvertLeftJoystickToggle?.Invoke(evt.newValue); };
+        leftToggle.RegisterCallback(leftToggleCallback);
+
+        if (rightToggleCallback != null)
+            rightToggle.UnregisterCallback(rightToggleCallback);
+        rightToggleCallback = evt => { onInvertRightJoystickToggle?.Invoke(evt.newValue); };
+        rightToggle.RegisterCallback(rightToggleCallback);
+
 
         // Ensure the tabIndex is within range before selecting the initial map.
         int mapsCount = maps.Count();
